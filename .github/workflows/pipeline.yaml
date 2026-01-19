@@ -1,0 +1,25 @@
+name: CI/CD Pipeline
+
+on:
+ push:
+    branches: [ main ]
+
+jobs:
+ build:
+   runs-on: ubuntu-latest
+
+   steps:
+   - name: Checkout code
+     uses: actions/checkout@v5
+
+   - name: Install pnpm
+     uses: pnpm/action-setup@v2
+     with:
+       version: 10
+       cache: true
+
+   - name: Install dependencies
+     run: pnpm install
+
+   - name: Run tests
+     run: pnpm test
